@@ -1,0 +1,19 @@
+C:\Users\534.PD\Desktop\Logistic\bin\Debug\Logistic.exe.config
+C:\Users\534.PD\Desktop\Logistic\bin\Debug\Logistic.exe
+C:\Users\534.PD\Desktop\Logistic\bin\Debug\Logistic.pdb
+C:\Users\534.PD\Desktop\Logistic\obj\Debug\Logistic.csprojResolveAssemblyReference.cache
+C:\Users\534.PD\Desktop\Logistic\obj\Debug\Logistic.LogGraph.resources
+C:\Users\534.PD\Desktop\Logistic\obj\Debug\Logistic.Properties.Resources.resources
+C:\Users\534.PD\Desktop\Logistic\obj\Debug\Logistic.csproj.GenerateResource.Cache
+C:\Users\534.PD\Desktop\Logistic\obj\Debug\Logistic.exe
+C:\Users\534.PD\Desktop\Logistic\obj\Debug\Logistic.pdb
+E:\Учеба\4 курс\Моделирование систем\Logistic\bin\Debug\Logistic.exe.config
+E:\Учеба\4 курс\Моделирование систем\Logistic\obj\Debug\Logistic.exe
+E:\Учеба\4 курс\Моделирование систем\Logistic\obj\Debug\Logistic.pdb
+E:\Учеба\4 курс\Моделирование систем\Logistic\bin\Debug\Logistic.exe
+E:\Учеба\4 курс\Моделирование систем\Logistic\bin\Debug\Logistic.pdb
+E:\Учеба\4 курс\Моделирование систем\Logistic\obj\Debug\Logistic.csprojResolveAssemblyReference.cache
+E:\Учеба\4 курс\Моделирование систем\Logistic\obj\Debug\Logistic.LogGraph.resources
+E:\Учеба\4 курс\Моделирование систем\Logistic\obj\Debug\Logistic.Properties.Resources.resources
+E:\Учеба\4 курс\Моделирование систем\Logistic\obj\Debug\Logistic.csproj.GenerateResource.Cache
+E:\Учеба\4 курс\Моделирование систем\Logistic\obj\Debug\Logistic.ParametrsForm.resources
