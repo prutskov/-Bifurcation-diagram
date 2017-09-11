@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Painter;
 using System.Drawing.Drawing2D;
+using System.Threading;
 
 namespace Logistic
 {
@@ -40,6 +41,7 @@ namespace Logistic
 
         Parametrs param = new Parametrs();
         List<Dots> dots_bifur = new List<Dots>();
+        Thread thread1 = new Thread();
         bool bifurcation;
         double[] dots;
 
