@@ -40,12 +40,13 @@
             this.bifurcat = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.NumberX = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.Ndot2 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.StepR = new System.Windows.Forms.TextBox();
-            this.NumberX = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.MaxR = new System.Windows.Forms.TextBox();
+            this.Acceracy = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.Graph)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -157,18 +158,35 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.Acceracy);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.NumberX);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.Ndot2);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.StepR);
+            this.groupBox2.Controls.Add(this.MaxR);
             this.groupBox2.Location = new System.Drawing.Point(442, 360);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(155, 137);
+            this.groupBox2.Size = new System.Drawing.Size(155, 150);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Параметры для бифуркационной диаграммы";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 101);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(51, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Номер X";
+            // 
+            // NumberX
+            // 
+            this.NumberX.Location = new System.Drawing.Point(85, 101);
+            this.NumberX.Name = "NumberX";
+            this.NumberX.Size = new System.Drawing.Size(54, 20);
+            this.NumberX.TabIndex = 8;
             // 
             // label5
             // 
@@ -195,28 +213,19 @@
             this.label6.TabIndex = 3;
             this.label6.Text = "Шаг по R";
             // 
-            // StepR
+            // MaxR
             // 
-            this.StepR.Location = new System.Drawing.Point(85, 49);
-            this.StepR.Name = "StepR";
-            this.StepR.Size = new System.Drawing.Size(54, 20);
-            this.StepR.TabIndex = 1;
+            this.MaxR.Location = new System.Drawing.Point(85, 49);
+            this.MaxR.Name = "MaxR";
+            this.MaxR.Size = new System.Drawing.Size(54, 20);
+            this.MaxR.TabIndex = 1;
             // 
-            // NumberX
+            // Acceracy
             // 
-            this.NumberX.Location = new System.Drawing.Point(85, 101);
-            this.NumberX.Name = "NumberX";
-            this.NumberX.Size = new System.Drawing.Size(54, 20);
-            this.NumberX.TabIndex = 8;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 101);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Номер X";
+            this.Acceracy.Location = new System.Drawing.Point(85, 127);
+            this.Acceracy.Name = "Acceracy";
+            this.Acceracy.Size = new System.Drawing.Size(54, 20);
+            this.Acceracy.TabIndex = 10;
             // 
             // LogGraph
             // 
@@ -260,7 +269,8 @@
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.TextBox Ndot2;
         private System.Windows.Forms.Label label6;
-        public System.Windows.Forms.TextBox StepR;
+        public System.Windows.Forms.TextBox MaxR;
+        public System.Windows.Forms.TextBox Acceracy;
     }
 }
 
