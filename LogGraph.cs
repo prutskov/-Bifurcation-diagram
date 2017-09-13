@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Painter;
 using System.Drawing.Drawing2D;
 using System.Threading;
+using System.Drawing.Text;
 
 namespace Logistic
 {
@@ -33,25 +34,25 @@ namespace Logistic
             firstx.Text = Convert.ToString(0.5);
             R.Text = Convert.ToString(1.2);
             MaxR.Text = Convert.ToString(4);
+            minR.Text = Convert.ToString(2);
             Ndot2.Text = Convert.ToString(50);
             NumberX.Text = Convert.ToString(1000);
-
-
+           bmp = new Bitmap(Graph.Width, Graph.Height);
+           painting();
         }
 
         Parametrs param = new Parametrs();
         List<Dots> dots_bifur = new List<Dots>();
-       
+        Bitmap bmp;
         
         bool bifurcation;
         double[] dots;
 
 
-
-        private void Graph_Paint(object sender, PaintEventArgs e)
+        private void painting()
         {
-
-            Graphics g = e.Graphics;
+            bmp = new Bitmap(Graph.Width, Graph.Height);
+            Graphics g = Graphics.FromImage(bmp); ;
 
             Graph.BackColor = param.backgroundcolor;
             //ручка для осей
@@ -71,6 +72,7 @@ namespace Logistic
             setka.DashStyle = DashStyle.Solid;
 
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.TextRenderingHint = TextRenderingHint.AntiAlias;
 
             //рисую оси
             g.DrawLine(osi, (float)param.X(Graph, param.xmin), (float)param.Y(Graph, 0), (float)param.X(Graph, param.xmax), (float)param.Y(Graph, 0));
@@ -104,6 +106,7 @@ namespace Logistic
             //подписываю оси
             String str;
             Font font = new Font("Arial", 8);
+            
             SolidBrush brush = new SolidBrush(Color.Black);
             //вправо
             for (double i = 0; i <= param.xmax; i += param.stepx)
@@ -141,13 +144,18 @@ namespace Logistic
                     }
                 }
             }
-            else 
+            else
             {
-                for (int i=0;i<dots_bifur.Count; i++)
+                for (int i = 0; i < dots_bifur.Count; i++)
                 {
                     g.DrawRectangle(bifur_pen, (float)param.X(Graph, dots_bifur[i].x), (float)param.Y(Graph, dots_bifur[i].y), 1, 1);
                 }
             }
+
+            Graph.Image = bmp;
+        }
+        private void Graph_Paint(object sender, PaintEventArgs e)
+        {           
 
         }
 
@@ -243,7 +251,7 @@ namespace Logistic
                 create_dots_bifur();
                 scale(dots_bifur);
             }
-            Graph.Invalidate();
+            painting();
         }
 
         private void bifurcat_CheckedChanged(object sender, EventArgs e)
