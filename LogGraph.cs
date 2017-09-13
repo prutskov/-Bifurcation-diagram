@@ -72,7 +72,7 @@ namespace Logistic
             Pen bifur_pen = new Pen(param.graphcolor, 1);
             setka.DashStyle = DashStyle.Solid;
 
-         //   g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+          g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.TextRenderingHint = TextRenderingHint.AntiAlias;
 
             double width = Graph.Width, height = Graph.Height;
@@ -149,12 +149,23 @@ namespace Logistic
             }
             else
             {
-                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                
                 for (int i = 0; i < dots_bifur.Count; i++)
                 {
                     //g.DrawRectangle(bifur_pen, (float)param.X(Graph, dots_bifur[i].x), (float)param.Y(Graph, dots_bifur[i].y), 1, 1);
                     bmp.SetPixel((int)param.X(width, dots_bifur[i].x), (int)param.Y(height, dots_bifur[i].y), bifur_pen.Color);
                 }
+
+
+                //double hor=5, ver=1e-6;
+                //Stack<Dots> stack = new Stack<Dots>();
+                //while (true)
+                //{
+
+                //    stack.Push(dots_bifur[0]);
+                //    stack.Push(dots_bifur[1]);
+                //    if (!stack.Peek().visited) g.DrawLine(graph_pen, (float)param.X(width, 0), (float)param.Y(width, ), )
+                //}
             }
 
             Graph.Image = bmp;
@@ -221,6 +232,7 @@ namespace Logistic
                 if (param.ymax < data[i]) param.ymax = data[i];
             }
             if (param.ymin > -param.ymax / 14) param.ymin = -param.ymax / 14;
+            param.xmin = -1;
             param.xmax = param.N;
             param.stepx = (double)param.xmax / 5;
             param.stepy = (double)param.ymax / 5;
@@ -262,6 +274,16 @@ namespace Logistic
         private void bifurcat_CheckedChanged(object sender, EventArgs e)
         {
             bifurcation = bifurcat.Checked;
+        }
+
+        private void deep_search()
+        {
+            Stack<Dots> stack=new Stack<Dots>();
+            while(true)
+            {
+
+                stack.Push(dots_bifur[0]);
+            }
         }
     }
 }

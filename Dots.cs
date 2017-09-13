@@ -9,11 +9,12 @@ namespace Logistic
     class Dots
     {
        public double x, y;
-
+      public bool visited;
        public Dots( double xx, double yy)
        {
            x = xx;
            y = yy;
+           visited = false;
        }
     }
 }
