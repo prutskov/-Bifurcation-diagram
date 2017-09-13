@@ -79,7 +79,7 @@ namespace Logistic
 
             //рисую оси
             g.DrawLine(osi, (float)param.X(width, param.xmin), (float)param.Y(height, 0), (float)param.X(width, param.xmax), (float)param.Y(height, 0));
-            g.DrawLine(osi, (float)param.X(width, 0), (float)param.Y(height, param.ymin), (float)param.X(width, 0), (float)param.Y(height, param.ymax));
+          //  g.DrawLine(osi, (float)param.X(width, 0), (float)param.Y(height, param.ymin), (float)param.X(width, 0), (float)param.Y(height, param.ymax));
 
             //рисую сетку
 
@@ -89,7 +89,7 @@ namespace Logistic
                 g.DrawLine(setka, (float)param.X(width, i), (float)param.Y(height, param.ymin), (float)param.X(width, i), (float)param.Y(height, param.ymax));
             }
             //лево вертикаль
-            for (double i = -param.stepx; i >= param.xmin; i -= param.stepx)
+            for (double i = 0; i >= param.xmin; i -= param.stepx)
             {
                 g.DrawLine(setka, (float)param.X(width, i), (float)param.Y(height, param.ymin), (float)param.X(width, i), (float)param.Y(height, param.ymax));
             }
@@ -124,16 +124,16 @@ namespace Logistic
                 g.DrawString(str, font, brush, (float)param.X(width, i), (float)param.Y(height, 0) + 2);
             }
             //вверх
-            for (double i = 0; i <= param.ymax; i += param.stepy)
+            for (double i = param.stepy; i <= param.ymax; i += param.stepy)
             {
                 str = i.ToString("F1");
-                g.DrawString(str, font, brush, (float)param.X(width, 0), (float)param.Y(height, i) + 2);
+                g.DrawString(str, font, brush, (float)param.X(width, param.xmin), (float)param.Y(height, i) + 2);
             }
             //вниз
             for (double i = -param.stepy; i >= param.ymin; i -= param.stepy)
             {
                 str = i.ToString("F1");
-                g.DrawString(str, font, brush, (float)param.X(width, 0), (float)param.Y(height, i) + 2);
+                g.DrawString(str, font, brush, (float)param.X(width, param.xmin), (float)param.Y(height, i) + 2);
             }
 
             if (!bifurcation)
