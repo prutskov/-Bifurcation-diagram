@@ -26,17 +26,18 @@ namespace Logistic
             param.N = 50;
             param.stepx = (double)param.xmax / 5;
             param.stepy = (double)param.ymax / 5;
-            param.osicolor = Color.Black;
-            param.setkacolor = Color.Blue;
-            param.backgroundcolor = Color.Yellow;
-            param.graphcolor = Color.Red;
+            param.osicolor = Color.White;
+            param.setkacolor = Color.White;
+            param.backgroundcolor = Color.Black;
+            param.graphcolor = Color.White;
             Ndot.Text = Convert.ToString(50);
             firstx.Text = Convert.ToString(0.5);
             R.Text = Convert.ToString(1.2);
             MaxR.Text = Convert.ToString(4);
             minR.Text = Convert.ToString(2);
-            Ndot2.Text = Convert.ToString(50);
+            Ndot2.Text = Convert.ToString(500);
             NumberX.Text = Convert.ToString(1000);
+            K.Text = Convert.ToString(1000);
            bmp = new Bitmap(Graph.Width, Graph.Height);
            painting();
         }
@@ -71,66 +72,68 @@ namespace Logistic
             Pen bifur_pen = new Pen(param.graphcolor, 1);
             setka.DashStyle = DashStyle.Solid;
 
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+         //   g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.TextRenderingHint = TextRenderingHint.AntiAlias;
 
+            double width = Graph.Width, height = Graph.Height;
+
             //рисую оси
-            g.DrawLine(osi, (float)param.X(Graph, param.xmin), (float)param.Y(Graph, 0), (float)param.X(Graph, param.xmax), (float)param.Y(Graph, 0));
-            g.DrawLine(osi, (float)param.X(Graph, 0), (float)param.Y(Graph, param.ymin), (float)param.X(Graph, 0), (float)param.Y(Graph, param.ymax));
+            g.DrawLine(osi, (float)param.X(width, param.xmin), (float)param.Y(height, 0), (float)param.X(width, param.xmax), (float)param.Y(height, 0));
+            g.DrawLine(osi, (float)param.X(width, 0), (float)param.Y(height, param.ymin), (float)param.X(width, 0), (float)param.Y(height, param.ymax));
 
             //рисую сетку
 
             //право вертикаль
             for (double i = param.stepx; i <= param.xmax; i += param.stepx)
             {
-                g.DrawLine(setka, (float)param.X(Graph, i), (float)param.Y(Graph, param.ymin), (float)param.X(Graph, i), (float)param.Y(Graph, param.ymax));
+                g.DrawLine(setka, (float)param.X(width, i), (float)param.Y(height, param.ymin), (float)param.X(width, i), (float)param.Y(height, param.ymax));
             }
             //лево вертикаль
             for (double i = -param.stepx; i >= param.xmin; i -= param.stepx)
             {
-                g.DrawLine(setka, (float)param.X(Graph, i), (float)param.Y(Graph, param.ymin), (float)param.X(Graph, i), (float)param.Y(Graph, param.ymax));
+                g.DrawLine(setka, (float)param.X(width, i), (float)param.Y(height, param.ymin), (float)param.X(width, i), (float)param.Y(height, param.ymax));
             }
 
             //верх горизонталь
             for (double i = param.stepy; i <= param.ymax; i += param.stepy)
             {
-                g.DrawLine(setka, (float)param.X(Graph, param.xmin), (float)param.Y(Graph, i), (float)param.X(Graph, param.xmax), (float)param.Y(Graph, i));
+                g.DrawLine(setka, (float)param.X(width, param.xmin), (float)param.Y(height, i), (float)param.X(width, param.xmax), (float)param.Y(height, i));
             }
 
             //низ горизонталь
             for (double i = -param.stepy; i >= param.ymin; i -= param.stepy)
             {
-                g.DrawLine(setka, (float)param.X(Graph, param.xmin), (float)param.Y(Graph, i), (float)param.X(Graph, param.xmax), (float)param.Y(Graph, i));
+                g.DrawLine(setka, (float)param.X(width, param.xmin), (float)param.Y(height, i), (float)param.X(width, param.xmax), (float)param.Y(height, i));
             }
 
             //подписываю оси
             String str;
             Font font = new Font("Arial", 8);
             
-            SolidBrush brush = new SolidBrush(Color.Black);
+            SolidBrush brush = new SolidBrush(Color.White);
             //вправо
             for (double i = 0; i <= param.xmax; i += param.stepx)
             {
                 str = i.ToString("F1");
-                g.DrawString(str, font, brush, (float)param.X(Graph, i), (float)param.Y(Graph, 0) + 2);
+                g.DrawString(str, font, brush, (float)param.X(width, i), (float)param.Y(height, 0) + 2);
             }
             //влево
             for (double i = -param.stepx; i >= param.xmin; i -= param.stepx)
             {
                 str = i.ToString("F1");
-                g.DrawString(str, font, brush, (float)param.X(Graph, i), (float)param.Y(Graph, 0) + 2);
+                g.DrawString(str, font, brush, (float)param.X(width, i), (float)param.Y(height, 0) + 2);
             }
             //вверх
             for (double i = 0; i <= param.ymax; i += param.stepy)
             {
                 str = i.ToString("F1");
-                g.DrawString(str, font, brush, (float)param.X(Graph, 0), (float)param.Y(Graph, i) + 2);
+                g.DrawString(str, font, brush, (float)param.X(width, 0), (float)param.Y(height, i) + 2);
             }
             //вниз
             for (double i = -param.stepy; i >= param.ymin; i -= param.stepy)
             {
                 str = i.ToString("F1");
-                g.DrawString(str, font, brush, (float)param.X(Graph, 0), (float)param.Y(Graph, i) + 2);
+                g.DrawString(str, font, brush, (float)param.X(width, 0), (float)param.Y(height, i) + 2);
             }
 
             if (!bifurcation)
@@ -140,15 +143,17 @@ namespace Logistic
                     //рисую график
                     for (int i = 0; i < param.N - 1; i++)
                     {
-                        g.DrawLine(graph_pen, (float)param.X(Graph, i), (float)param.Y(Graph, dots[i]), (float)param.X(Graph, i + 1), (float)param.Y(Graph, dots[i + 1]));
+                        g.DrawLine(graph_pen, (float)param.X(width, i), (float)param.Y(height, dots[i]), (float)param.X(width, i + 1), (float)param.Y(height, dots[i + 1]));
                     }
                 }
             }
             else
             {
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
                 for (int i = 0; i < dots_bifur.Count; i++)
                 {
-                    g.DrawRectangle(bifur_pen, (float)param.X(Graph, dots_bifur[i].x), (float)param.Y(Graph, dots_bifur[i].y), 1, 1);
+                    //g.DrawRectangle(bifur_pen, (float)param.X(Graph, dots_bifur[i].x), (float)param.Y(Graph, dots_bifur[i].y), 1, 1);
+                    bmp.SetPixel((int)param.X(width, dots_bifur[i].x), (int)param.Y(height, dots_bifur[i].y), bifur_pen.Color);
                 }
             }
 
@@ -165,8 +170,7 @@ namespace Logistic
             ParametrsForm parametr_form = new ParametrsForm(param);
             parametr_form.ShowDialog();
             param = parametr_form.transfer();
-
-            Graph.Invalidate();
+            painting();
         }
 
         private void create_dots(double x0, double R)
@@ -187,13 +191,14 @@ namespace Logistic
             double min = double.Parse(minR.Text);
             double max = double.Parse(MaxR.Text);
             int n = int.Parse(NumberX.Text);
+            int kk = int.Parse(K.Text);
             Random rnd=new Random();
-            double y0 = rnd.NextDouble();
+            
             for (double i = min; i <= max; i += stepR)
             {
-                for (int k = 0; k < 1000; k++)
+                for (int k = 0; k < kk; k++)
                 {
-                    double y = y0;                   
+                    double y = rnd.NextDouble(); ;                   
                     for (int j = 1; j < n; j++)
                     {
                         y = y * i * (1 - y);

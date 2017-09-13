@@ -13,14 +13,14 @@ namespace Painter
         public int N;
         public Color backgroundcolor, graphcolor, osicolor, setkacolor;
 
-        public double X(System.Windows.Forms.PictureBox pic, double x)
+        public double X(double width, double x)
         {
-            return pic.Width / (xmax - xmin) * (x - xmin);
+            return width / (xmax - xmin) * (x - xmin);
         }
 
-        public double Y(System.Windows.Forms.PictureBox pic, double y)
+        public double Y(double height, double y)
         {
-            return -pic.Height / (ymax - ymin) * (y - ymax);
+            return -height / (ymax - ymin) * (y - ymax);
         }
     }
 }

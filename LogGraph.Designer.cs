@@ -40,6 +40,7 @@
             this.bifurcat = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.minR = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.NumberX = new System.Windows.Forms.TextBox();
@@ -47,7 +48,8 @@
             this.Ndot2 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.MaxR = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.K = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Graph)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -58,7 +60,7 @@
             this.Graph.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Graph.Location = new System.Drawing.Point(12, 9);
             this.Graph.Name = "Graph";
-            this.Graph.Size = new System.Drawing.Size(755, 341);
+            this.Graph.Size = new System.Drawing.Size(995, 394);
             this.Graph.TabIndex = 0;
             this.Graph.TabStop = false;
             this.Graph.Paint += new System.Windows.Forms.PaintEventHandler(this.Graph_Paint);
@@ -72,7 +74,7 @@
             // 
             // parametrsBtn
             // 
-            this.parametrsBtn.Location = new System.Drawing.Point(12, 360);
+            this.parametrsBtn.Location = new System.Drawing.Point(12, 521);
             this.parametrsBtn.Name = "parametrsBtn";
             this.parametrsBtn.Size = new System.Drawing.Size(113, 36);
             this.parametrsBtn.TabIndex = 2;
@@ -91,7 +93,7 @@
             // 
             // createdotsBtn
             // 
-            this.createdotsBtn.Location = new System.Drawing.Point(131, 360);
+            this.createdotsBtn.Location = new System.Drawing.Point(131, 521);
             this.createdotsBtn.Name = "createdotsBtn";
             this.createdotsBtn.Size = new System.Drawing.Size(113, 36);
             this.createdotsBtn.TabIndex = 4;
@@ -134,7 +136,7 @@
             // bifurcat
             // 
             this.bifurcat.AutoSize = true;
-            this.bifurcat.Location = new System.Drawing.Point(259, 360);
+            this.bifurcat.Location = new System.Drawing.Point(12, 563);
             this.bifurcat.Name = "bifurcat";
             this.bifurcat.Size = new System.Drawing.Size(172, 17);
             this.bifurcat.TabIndex = 9;
@@ -150,7 +152,7 @@
             this.groupBox1.Controls.Add(this.firstx);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.Ndot);
-            this.groupBox1.Location = new System.Drawing.Point(612, 360);
+            this.groupBox1.Location = new System.Drawing.Point(442, 409);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(155, 120);
             this.groupBox1.TabIndex = 10;
@@ -159,6 +161,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.K);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.minR);
             this.groupBox2.Controls.Add(this.label4);
@@ -167,16 +171,25 @@
             this.groupBox2.Controls.Add(this.Ndot2);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.MaxR);
-            this.groupBox2.Location = new System.Drawing.Point(442, 360);
+            this.groupBox2.Location = new System.Drawing.Point(250, 409);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(155, 150);
+            this.groupBox2.Size = new System.Drawing.Size(186, 220);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Параметры для бифуркационной диаграммы";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(9, 100);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(91, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Минимальный R";
+            // 
             // minR
             // 
-            this.minR.Location = new System.Drawing.Point(85, 127);
+            this.minR.Location = new System.Drawing.Point(120, 100);
             this.minR.Name = "minR";
             this.minR.Size = new System.Drawing.Size(54, 20);
             this.minR.TabIndex = 10;
@@ -184,15 +197,15 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 101);
+            this.label4.Location = new System.Drawing.Point(6, 126);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 13);
+            this.label4.Size = new System.Drawing.Size(108, 13);
             this.label4.TabIndex = 9;
-            this.label4.Text = "Номер X";
+            this.label4.Text = "Номер рисуемого X";
             // 
             // NumberX
             // 
-            this.NumberX.Location = new System.Drawing.Point(85, 101);
+            this.NumberX.Location = new System.Drawing.Point(120, 126);
             this.NumberX.Name = "NumberX";
             this.NumberX.Size = new System.Drawing.Size(54, 20);
             this.NumberX.TabIndex = 8;
@@ -200,7 +213,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 75);
+            this.label5.Location = new System.Drawing.Point(9, 49);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 13);
             this.label5.TabIndex = 7;
@@ -208,7 +221,7 @@
             // 
             // Ndot2
             // 
-            this.Ndot2.Location = new System.Drawing.Point(85, 75);
+            this.Ndot2.Location = new System.Drawing.Point(120, 46);
             this.Ndot2.Name = "Ndot2";
             this.Ndot2.Size = new System.Drawing.Size(54, 20);
             this.Ndot2.TabIndex = 5;
@@ -216,33 +229,41 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 49);
+            this.label6.Location = new System.Drawing.Point(9, 75);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 13);
+            this.label6.Size = new System.Drawing.Size(97, 13);
             this.label6.TabIndex = 3;
-            this.label6.Text = "Макс. R";
+            this.label6.Text = "Максимальный R";
             // 
             // MaxR
             // 
-            this.MaxR.Location = new System.Drawing.Point(85, 49);
+            this.MaxR.Location = new System.Drawing.Point(120, 72);
             this.MaxR.Name = "MaxR";
             this.MaxR.Size = new System.Drawing.Size(54, 20);
             this.MaxR.TabIndex = 1;
             // 
-            // label7
+            // K
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 127);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 13);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Мин. R";
+            this.K.Location = new System.Drawing.Point(120, 152);
+            this.K.Name = "K";
+            this.K.Size = new System.Drawing.Size(54, 20);
+            this.K.TabIndex = 12;
+            // 
+            // label8
+            // 
+            this.label8.AutoEllipsis = true;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(9, 155);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(101, 13);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Число повторений";
             // 
             // LogGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(779, 522);
+            this.ClientSize = new System.Drawing.Size(1019, 628);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bifurcat);
@@ -250,6 +271,7 @@
             this.Controls.Add(this.parametrsBtn);
             this.Controls.Add(this.Graph);
             this.Name = "LogGraph";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Графики";
             ((System.ComponentModel.ISupportInitialize)(this.Graph)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -283,6 +305,8 @@
         public System.Windows.Forms.TextBox MaxR;
         public System.Windows.Forms.TextBox minR;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        public System.Windows.Forms.TextBox K;
     }
 }
 
