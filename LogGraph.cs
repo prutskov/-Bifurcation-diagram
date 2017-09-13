@@ -41,7 +41,8 @@ namespace Logistic
 
         Parametrs param = new Parametrs();
         List<Dots> dots_bifur = new List<Dots>();
-        Thread thread1 = new Thread();
+       
+        
         bool bifurcation;
         double[] dots;
 
@@ -63,6 +64,10 @@ namespace Logistic
 
             //ручка для сетки
             Pen graph_pen = new Pen(param.graphcolor, 3);
+            setka.DashStyle = DashStyle.Solid;
+
+            //ручка для сетки
+            Pen bifur_pen = new Pen(param.graphcolor, 1);
             setka.DashStyle = DashStyle.Solid;
 
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
@@ -140,7 +145,7 @@ namespace Logistic
             {
                 for (int i=0;i<dots_bifur.Count; i++)
                 {
-                    g.DrawEllipse(graph_pen, (float)param.X(Graph, dots_bifur[i].x) -1, (float)param.Y(Graph, dots_bifur[i].y)+1, 2, 2);
+                    g.DrawRectangle(bifur_pen, (float)param.X(Graph, dots_bifur[i].x), (float)param.Y(Graph, dots_bifur[i].y), 1, 1);
                 }
             }
 
@@ -166,24 +171,29 @@ namespace Logistic
             }
         }
 
-        private void create_dots_bifur()
+        public void create_dots_bifur()
         {
             dots_bifur.Clear();
             Dots dot;
-            double stepR = double.Parse(MaxR.Text) / double.Parse(Ndot2.Text);
-            for (double i = stepR; i <= double.Parse(MaxR.Text); i += stepR)
+            double stepR = (double.Parse(MaxR.Text)-double.Parse(minR.Text)) / double.Parse(Ndot2.Text);
+            double min = double.Parse(minR.Text);
+            double max = double.Parse(MaxR.Text);
+            int n = int.Parse(NumberX.Text);
+            Random rnd=new Random();
+            double y0 = rnd.NextDouble();
+            for (double i = min; i <= max; i += stepR)
             {
-                for (int k = 0; k < 100; k++)
+                for (int k = 0; k < 1000; k++)
                 {
-                    double[] y = new double[Convert.ToInt32(NumberX.Text)];
-                    y[0] = double.Parse(firstx.Text);
-                    for (int j = 1; j < Convert.ToInt32(NumberX.Text); j++)
+                    double y = y0;                   
+                    for (int j = 1; j < n; j++)
                     {
-                        y[j] = i * y[j-1]*(1 - y[j - 1]);
+                        y = y * i * (1 - y);
                     }
 
-                    dot = new Dots(i, y[Convert.ToInt32(NumberX.Text) - 1]);
+                    dot = new Dots(i, y);
                     dots_bifur.Add(dot);
+                 
                 }
             }
         }
@@ -213,6 +223,7 @@ namespace Logistic
                 if (dot[i].y < param.ymin) param.ymin = dot[i].y;
             }
             if (param.ymin > -param.ymax / 14) param.ymin = -param.ymax / 14;
+            param.xmin = double.Parse(minR.Text);
             param.xmax = double.Parse(MaxR.Text);
             param.stepx = (double)param.xmax / 5;
             param.stepy = (double)param.ymax / 5;

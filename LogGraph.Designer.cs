@@ -40,13 +40,14 @@
             this.bifurcat = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.minR = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.NumberX = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.Ndot2 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.MaxR = new System.Windows.Forms.TextBox();
-            this.Acceracy = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Graph)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -158,7 +159,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.Acceracy);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.minR);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.NumberX);
             this.groupBox2.Controls.Add(this.label5);
@@ -171,6 +173,13 @@
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Параметры для бифуркационной диаграммы";
+            // 
+            // minR
+            // 
+            this.minR.Location = new System.Drawing.Point(85, 127);
+            this.minR.Name = "minR";
+            this.minR.Size = new System.Drawing.Size(54, 20);
+            this.minR.TabIndex = 10;
             // 
             // label4
             // 
@@ -209,9 +218,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(9, 49);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 13);
+            this.label6.Size = new System.Drawing.Size(48, 13);
             this.label6.TabIndex = 3;
-            this.label6.Text = "Шаг по R";
+            this.label6.Text = "Макс. R";
             // 
             // MaxR
             // 
@@ -220,12 +229,14 @@
             this.MaxR.Size = new System.Drawing.Size(54, 20);
             this.MaxR.TabIndex = 1;
             // 
-            // Acceracy
+            // label7
             // 
-            this.Acceracy.Location = new System.Drawing.Point(85, 127);
-            this.Acceracy.Name = "Acceracy";
-            this.Acceracy.Size = new System.Drawing.Size(54, 20);
-            this.Acceracy.TabIndex = 10;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 127);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(42, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Мин. R";
             // 
             // LogGraph
             // 
@@ -270,7 +281,8 @@
         public System.Windows.Forms.TextBox Ndot2;
         private System.Windows.Forms.Label label6;
         public System.Windows.Forms.TextBox MaxR;
-        public System.Windows.Forms.TextBox Acceracy;
+        public System.Windows.Forms.TextBox minR;
+        private System.Windows.Forms.Label label7;
     }
 }
 
