@@ -72,6 +72,10 @@ namespace Logistic
             Pen bifur_pen = new Pen(param.graphcolor, 1);
             setka.DashStyle = DashStyle.Solid;
 
+            //ручка для сетки
+            Pen solid_pen = new Pen(Color.Red, 1);
+            solid_pen.DashStyle = DashStyle.Solid;
+
           g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.TextRenderingHint = TextRenderingHint.AntiAlias;
 
@@ -160,15 +164,17 @@ namespace Logistic
                 }
 
 
-                //double hor=5, ver=1e-6;
-                //Stack<Dots> stack = new Stack<Dots>();
-                //while (true)
-                //{
-
-                //    stack.Push(dots_bifur[0]);
-                //    stack.Push(dots_bifur[1]);
-                //    if (!stack.Peek().visited) g.DrawLine(graph_pen, (float)param.X(width, 0), (float)param.Y(width, ), )
-                //}
+                for (int i=0; i<dots_bifur.Count(); i++)
+                {
+                    for (int j=0; j<dots_bifur[i].Count(); j++)
+                    {
+                        for (int k=0; k< dots_bifur[i][j].Next.Count(); k++)
+                        {
+                            g.DrawLine(solid_pen, (float)param.X(width, dots_bifur[i][j].x), (float)param.Y(height, dots_bifur[i][j].y),
+                                (float)param.X(width, dots_bifur[i][j].Next[k].x), (float)param.Y(width, dots_bifur[i][j].Next[k].y));
+                        }
+                    }
+                }
             }
 
             Graph.Image = bmp;
@@ -214,8 +220,8 @@ namespace Logistic
             for (double i = min; i <= max; i += stepR)
             {
                 dot_buffer= new List<Dots>();
-                dot=new Dots();
-                dot.x = i;
+                
+               
                 for (int k = 0; k < kk; k++)
                 {
                     dot = new Dots();
@@ -224,6 +230,8 @@ namespace Logistic
                     {
                         y = y * i * (1 - y);
                     }
+                    dot.x = i;
+                    dot.y = y;
                     dot_buffer.Add(dot);
                 }
                 dots_bifur.Add(dot_buffer);
@@ -295,7 +303,7 @@ namespace Logistic
             for (int i = 0; i < dots_bifur.Count; i++)
             {
                 double dif = 0, dif_min = 99999999;
-                int number_min;
+                int number_min=0;
                 for (int k = 0; k < dots_bifur[i].Count(); k++)
                 {
                     for (int j = 0; j < dots_bifur[i + 1].Count(); j++)
