@@ -37,7 +37,8 @@ namespace Logistic
             minR.Text = Convert.ToString(2);
             Ndot2.Text = Convert.ToString(500);
             NumberX.Text = Convert.ToString(1000);
-            K.Text = Convert.ToString(1000);
+            K.Text = Convert.ToString(100);
+            Accuracy.Text = Convert.ToString(2);
            bmp = new Bitmap(Graph.Width, Graph.Height);
            painting();
         }
@@ -171,7 +172,7 @@ namespace Logistic
                         for (int k=0; k< dots_bifur[i][j].Next.Count(); k++)
                         {
                             g.DrawLine(solid_pen, (float)param.X(width, dots_bifur[i][j].x), (float)param.Y(height, dots_bifur[i][j].y),
-                                (float)param.X(width, dots_bifur[i][j].Next[k].x), (float)param.Y(width, dots_bifur[i][j].Next[k].y));
+                                (float)param.X(width, dots_bifur[i][j].Next[k].x), (float)param.Y(height, dots_bifur[i][j].Next[k].y));
                         }
                     }
                 }
@@ -289,6 +290,7 @@ namespace Logistic
             {
                 create_dots_bifur();
                 scale(dots_bifur);
+                deep_search();
             }
             painting();
         }
@@ -300,7 +302,7 @@ namespace Logistic
 
         private void deep_search()
         {
-            for (int i = 0; i < dots_bifur.Count; i++)
+            for (int i = 0; i < dots_bifur.Count-1; i++)
             {
                 double dif = 0, dif_min = 99999999;
                 int number_min=0;
@@ -312,7 +314,7 @@ namespace Logistic
                         dif = dots_bifur[i + 1][j].y - dots_bifur[i][k].y;
                         if (dif < dif_min) { number_min = j; dif_min = dif; }
                     }
-                    dots_bifur[i][k].Next.Add(dots_bifur[i][number_min]);
+                    dots_bifur[i][k].Next.Add(dots_bifur[i+1][number_min]);
 
                 }
             }
