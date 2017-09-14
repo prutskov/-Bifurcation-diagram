@@ -43,7 +43,7 @@ namespace Logistic
         }
 
         Parametrs param = new Parametrs();
-        List<Dots> dots_bifur = new List<Dots>();
+        List <List<Dots>> dots_bifur = new List <List<Dots>>();
         Bitmap bmp;
         
         bool bifurcation;
@@ -152,10 +152,10 @@ namespace Logistic
                 
                 for (int i = 0; i < dots_bifur.Count; i++)
                 {
-                    for (int j = 0; j < dots_bifur[i].y.Count; j++)
+                    for (int j = 0; j < dots_bifur[i].Count; j++)
                     {
                         //g.DrawRectangle(bifur_pen, (float)param.X(Graph, dots_bifur[i].x), (float)param.Y(Graph, dots_bifur[i].y), 1, 1);
-                        bmp.SetPixel((int)param.X(width, dots_bifur[i].x), (int)param.Y(height, dots_bifur[i].y[j]), bifur_pen.Color);
+                        bmp.SetPixel((int)param.X(width, dots_bifur[i][j].x), (int)param.Y(height, dots_bifur[i][j].y), bifur_pen.Color);
                     }
                 }
 
@@ -208,6 +208,7 @@ namespace Logistic
             int kk = int.Parse(K.Text);
             double acc = double.Parse(Accuracy.Text);
             Random rnd=new Random();
+            List<Dots> dot_buffer;
 
             /*  for (double i = min; i <= max; i += stepR)
               {
@@ -227,7 +228,8 @@ namespace Logistic
              */
             for (double i = min; i <= max; i += stepR)
             {
-                dot = new Dots();
+                dot_buffer= new List<Dots>();
+                dot=new Dots();
                 dot.x = i;
                 for (int k = 0; k < kk; k++)
                 {
@@ -236,11 +238,11 @@ namespace Logistic
                     {
                         y = y * i * (1 - y);
                     }
-                    if (dot.y.Count==0) dot.y.Add(y);
-                    if (Math.Abs(dot.y.Last() - y) > acc) dot.y.Add(y); 
-
+                    if (dot_buffer.Count == 0) { dot.y = y; dot_buffer.Add(dot); }
+                    if (Math.Abs(dot.y - y) > acc) dot_buffer.Add(dot);
                 }
-                dots_bifur.Add(dot);
+                dots_bifur.Add(dot_buffer);
+                
             }
 
 
@@ -262,16 +264,16 @@ namespace Logistic
             param.stepy = (double)param.ymax / 5;
         }
 
-        private void scale(List<Dots> dot)
+        private void scale(List<List<Dots>> dot)
         {
             param.ymax = 0;
             param.ymin = 0;
             for (int i = 0; i < dot.Count; i++)
             {
-                for (int j = 0; j < dot[i].y.Count; j++)
+                for (int j = 0; j < dot[i].Count; j++)
                 {
-                    if (dot[i].y[j] > param.ymax) param.ymax = dot[i].y[j];
-                    if (dot[i].y[j] < param.ymin) param.ymin = dot[i].y[j];
+                    if (dot[i][j].y > param.ymax) param.ymax = dot[i][j].y;
+                    if (dot[i][j].y< param.ymin) param.ymin = dot[i][j].y;
                 }
             }
             if (param.ymin > -param.ymax / 14) param.ymin = -param.ymax / 14;
@@ -303,14 +305,24 @@ namespace Logistic
             bifurcation = bifurcat.Checked;
         }
 
-        private void deep_search()
-        {
-            Stack<Dots> stack=new Stack<Dots>();
-            while(true)
-            {
+        //private void deep_search()
+        //{
+        //   for (int i=0; i<dots_bifur.Count; i++)
+        //   {
+        //       double dif = 0, dif_min=99999999;
+        //       int number_min;
+        //       for (int k=0; k<dots_bifur[i].y.Count();k++)
+        //       {
+        //          for (int j=0; j<dots_bifur[i+1].y.Count(); j++)
+        //          {
+                      
+        //              dif = dots_bifur[i + 1].y[k] - dots_bifur[i].y[j];
+        //              if (dif < dif_min) { number_min = j; dif_min = dif; }
+        //          }
+        //     //     dots_bifur[i].Next.Add(dots_bifur[i].y[number_min]);
 
-                stack.Push(dots_bifur[0]);
-            }
-        }
+        //       }
+        //   }
+        //}
     }
 }
