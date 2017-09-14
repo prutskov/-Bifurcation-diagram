@@ -304,14 +304,14 @@ namespace Logistic
         {
             for (int i = 0; i < dots_bifur.Count-1; i++)
             {
-                double dif = 0, dif_min = 99999999;
+                double dif = 0, dif_min = double.Parse(Accuracy.Text);
                 int number_min=0;
                 for (int k = 0; k < dots_bifur[i].Count(); k++)
                 {
                     for (int j = 0; j < dots_bifur[i + 1].Count(); j++)
                     {
 
-                        dif = dots_bifur[i + 1][j].y - dots_bifur[i][k].y;
+                        dif = Math.Abs(dots_bifur[i + 1][j].y - dots_bifur[i][k].y);
                         if (dif < dif_min) { number_min = j; dif_min = dif; }
                     }
                     dots_bifur[i][k].Next.Add(dots_bifur[i+1][number_min]);
