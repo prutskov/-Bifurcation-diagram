@@ -8,13 +8,16 @@ namespace Logistic
 {
     class Dots
     {
-       public double x, y;
-      public bool visited;
-       public Dots( double xx, double yy)
+       public double x;
+       public List<double> y=new List <double>();
+       public List<Dots> Next=new List<Dots>();
+       public Dots()
        {
-           x = xx;
-           y = yy;
-           visited = false;
+           x = 0;
+          
+           Next = null;
        }
     }
+
+   
 }

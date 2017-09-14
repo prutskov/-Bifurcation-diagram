@@ -152,8 +152,11 @@ namespace Logistic
                 
                 for (int i = 0; i < dots_bifur.Count; i++)
                 {
-                    //g.DrawRectangle(bifur_pen, (float)param.X(Graph, dots_bifur[i].x), (float)param.Y(Graph, dots_bifur[i].y), 1, 1);
-                    bmp.SetPixel((int)param.X(width, dots_bifur[i].x), (int)param.Y(height, dots_bifur[i].y), bifur_pen.Color);
+                    for (int j = 0; j < dots_bifur[i].y.Count; j++)
+                    {
+                        //g.DrawRectangle(bifur_pen, (float)param.X(Graph, dots_bifur[i].x), (float)param.Y(Graph, dots_bifur[i].y), 1, 1);
+                        bmp.SetPixel((int)param.X(width, dots_bifur[i].x), (int)param.Y(height, dots_bifur[i].y[j]), bifur_pen.Color);
+                    }
                 }
 
 
@@ -203,23 +206,44 @@ namespace Logistic
             double max = double.Parse(MaxR.Text);
             int n = int.Parse(NumberX.Text);
             int kk = int.Parse(K.Text);
+            double acc = double.Parse(Accuracy.Text);
             Random rnd=new Random();
-            
+
+            /*  for (double i = min; i <= max; i += stepR)
+              {
+                  for (int k = 0; k < kk; k++)
+                  {
+                      double y = rnd.NextDouble(); ;                   
+                      for (int j = 1; j < n; j++)
+                      {
+                          y = y * i * (1 - y);
+                      }
+
+                      dot = new Dots(i, y);
+                      dots_bifur.Add(dot);
+                 
+                  }
+              }
+             */
             for (double i = min; i <= max; i += stepR)
             {
+                dot = new Dots();
+                dot.x = i;
                 for (int k = 0; k < kk; k++)
                 {
-                    double y = rnd.NextDouble(); ;                   
+                    double y = rnd.NextDouble(); 
                     for (int j = 1; j < n; j++)
                     {
                         y = y * i * (1 - y);
                     }
+                    if (dot.y.Count==0) dot.y.Add(y);
+                    if (Math.Abs(dot.y.Last() - y) > acc) dot.y.Add(y); 
 
-                    dot = new Dots(i, y);
-                    dots_bifur.Add(dot);
-                 
                 }
+                dots_bifur.Add(dot);
             }
+
+
         }
 
         private void scale(double[] data)
@@ -244,8 +268,11 @@ namespace Logistic
             param.ymin = 0;
             for (int i = 0; i < dot.Count; i++)
             {
-                if (dot[i].y > param.ymax) param.ymax= dot[i].y;
-                if (dot[i].y < param.ymin) param.ymin = dot[i].y;
+                for (int j = 0; j < dot[i].y.Count; j++)
+                {
+                    if (dot[i].y[j] > param.ymax) param.ymax = dot[i].y[j];
+                    if (dot[i].y[j] < param.ymin) param.ymin = dot[i].y[j];
+                }
             }
             if (param.ymin > -param.ymax / 14) param.ymin = -param.ymax / 14;
             param.xmin = double.Parse(minR.Text);

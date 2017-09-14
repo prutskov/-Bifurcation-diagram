@@ -40,6 +40,8 @@
             this.bifurcat = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.K = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.minR = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -48,8 +50,8 @@
             this.Ndot2 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.MaxR = new System.Windows.Forms.TextBox();
-            this.K = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.Accuracy = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Graph)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -161,6 +163,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.Accuracy);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.K);
             this.groupBox2.Controls.Add(this.label7);
@@ -177,6 +181,23 @@
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Параметры для бифуркационной диаграммы";
+            // 
+            // label8
+            // 
+            this.label8.AutoEllipsis = true;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(9, 155);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(101, 13);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Число повторений";
+            // 
+            // K
+            // 
+            this.K.Location = new System.Drawing.Point(120, 152);
+            this.K.Name = "K";
+            this.K.Size = new System.Drawing.Size(54, 20);
+            this.K.TabIndex = 12;
             // 
             // label7
             // 
@@ -242,22 +263,22 @@
             this.MaxR.Size = new System.Drawing.Size(54, 20);
             this.MaxR.TabIndex = 1;
             // 
-            // K
+            // Accuracy
             // 
-            this.K.Location = new System.Drawing.Point(120, 152);
-            this.K.Name = "K";
-            this.K.Size = new System.Drawing.Size(54, 20);
-            this.K.TabIndex = 12;
+            this.Accuracy.Location = new System.Drawing.Point(120, 178);
+            this.Accuracy.Name = "Accuracy";
+            this.Accuracy.Size = new System.Drawing.Size(54, 20);
+            this.Accuracy.TabIndex = 13;
             // 
-            // label8
+            // label9
             // 
-            this.label8.AutoEllipsis = true;
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 155);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(101, 13);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "Число повторений";
+            this.label9.AutoEllipsis = true;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(9, 178);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(95, 13);
+            this.label9.TabIndex = 14;
+            this.label9.Text = "Порог сравнения";
             // 
             // LogGraph
             // 
@@ -307,6 +328,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         public System.Windows.Forms.TextBox K;
+        private System.Windows.Forms.Label label9;
+        public System.Windows.Forms.TextBox Accuracy;
     }
 }
 
