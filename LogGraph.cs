@@ -239,7 +239,7 @@ namespace Logistic
                         y = y * i * (1 - y);
                     }
                     if (dot_buffer.Count == 0) { dot.y = y; dot_buffer.Add(dot); }
-                    if (Math.Abs(dot.y - y) > acc) dot_buffer.Add(dot);
+                    if (Math.Abs(dot.y - y) > acc) { dot.y = y; dot_buffer.Add(dot); }
                 }
                 dots_bifur.Add(dot_buffer);
                 
