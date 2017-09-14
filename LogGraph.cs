@@ -210,22 +210,7 @@ namespace Logistic
             Random rnd=new Random();
             List<Dots> dot_buffer;
 
-            /*  for (double i = min; i <= max; i += stepR)
-              {
-                  for (int k = 0; k < kk; k++)
-                  {
-                      double y = rnd.NextDouble(); ;                   
-                      for (int j = 1; j < n; j++)
-                      {
-                          y = y * i * (1 - y);
-                      }
-
-                      dot = new Dots(i, y);
-                      dots_bifur.Add(dot);
-                 
-                  }
-              }
-             */
+           
             for (double i = min; i <= max; i += stepR)
             {
                 dot_buffer= new List<Dots>();
@@ -233,13 +218,13 @@ namespace Logistic
                 dot.x = i;
                 for (int k = 0; k < kk; k++)
                 {
+                    dot = new Dots();
                     double y = rnd.NextDouble(); 
                     for (int j = 1; j < n; j++)
                     {
                         y = y * i * (1 - y);
                     }
-                    if (dot_buffer.Count == 0) { dot.y = y; dot_buffer.Add(dot); }
-                    if (Math.Abs(dot.y - y) > acc) { dot.y = y; dot_buffer.Add(dot); }
+                    dot_buffer.Add(dot);
                 }
                 dots_bifur.Add(dot_buffer);
                 
@@ -305,24 +290,24 @@ namespace Logistic
             bifurcation = bifurcat.Checked;
         }
 
-        //private void deep_search()
-        //{
-        //   for (int i=0; i<dots_bifur.Count; i++)
-        //   {
-        //       double dif = 0, dif_min=99999999;
-        //       int number_min;
-        //       for (int k=0; k<dots_bifur[i].y.Count();k++)
-        //       {
-        //          for (int j=0; j<dots_bifur[i+1].y.Count(); j++)
-        //          {
-                      
-        //              dif = dots_bifur[i + 1].y[k] - dots_bifur[i].y[j];
-        //              if (dif < dif_min) { number_min = j; dif_min = dif; }
-        //          }
-        //     //     dots_bifur[i].Next.Add(dots_bifur[i].y[number_min]);
+        private void deep_search()
+        {
+            for (int i = 0; i < dots_bifur.Count; i++)
+            {
+                double dif = 0, dif_min = 99999999;
+                int number_min;
+                for (int k = 0; k < dots_bifur[i].Count(); k++)
+                {
+                    for (int j = 0; j < dots_bifur[i + 1].Count(); j++)
+                    {
 
-        //       }
-        //   }
-        //}
+                        dif = dots_bifur[i + 1][j].y - dots_bifur[i][k].y;
+                        if (dif < dif_min) { number_min = j; dif_min = dif; }
+                    }
+                    dots_bifur[i][k].Next.Add(dots_bifur[i][number_min]);
+
+                }
+            }
+        }
     }
 }
