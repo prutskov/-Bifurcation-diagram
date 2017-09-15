@@ -53,6 +53,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.MaxR = new System.Windows.Forms.TextBox();
             this.SolidLine = new System.Windows.Forms.CheckBox();
+            this.CloseForm = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Graph)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -63,7 +64,7 @@
             this.Graph.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Graph.Location = new System.Drawing.Point(12, 9);
             this.Graph.Name = "Graph";
-            this.Graph.Size = new System.Drawing.Size(995, 394);
+            this.Graph.Size = new System.Drawing.Size(1000, 500);
             this.Graph.TabIndex = 0;
             this.Graph.TabStop = false;
             this.Graph.Paint += new System.Windows.Forms.PaintEventHandler(this.Graph_Paint);
@@ -77,9 +78,9 @@
             // 
             // parametrsBtn
             // 
-            this.parametrsBtn.Location = new System.Drawing.Point(12, 521);
+            this.parametrsBtn.Location = new System.Drawing.Point(899, 515);
             this.parametrsBtn.Name = "parametrsBtn";
-            this.parametrsBtn.Size = new System.Drawing.Size(113, 36);
+            this.parametrsBtn.Size = new System.Drawing.Size(113, 34);
             this.parametrsBtn.TabIndex = 2;
             this.parametrsBtn.Text = "Параметры...";
             this.parametrsBtn.UseVisualStyleBackColor = true;
@@ -96,9 +97,9 @@
             // 
             // createdotsBtn
             // 
-            this.createdotsBtn.Location = new System.Drawing.Point(131, 521);
+            this.createdotsBtn.Location = new System.Drawing.Point(899, 553);
             this.createdotsBtn.Name = "createdotsBtn";
-            this.createdotsBtn.Size = new System.Drawing.Size(113, 36);
+            this.createdotsBtn.Size = new System.Drawing.Size(113, 34);
             this.createdotsBtn.TabIndex = 4;
             this.createdotsBtn.Text = "Построить";
             this.createdotsBtn.UseVisualStyleBackColor = true;
@@ -139,7 +140,7 @@
             // bifurcat
             // 
             this.bifurcat.AutoSize = true;
-            this.bifurcat.Location = new System.Drawing.Point(12, 563);
+            this.bifurcat.Location = new System.Drawing.Point(568, 526);
             this.bifurcat.Name = "bifurcat";
             this.bifurcat.Size = new System.Drawing.Size(172, 17);
             this.bifurcat.TabIndex = 9;
@@ -149,21 +150,23 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Gray;
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.R);
             this.groupBox1.Controls.Add(this.firstx);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.Ndot);
-            this.groupBox1.Location = new System.Drawing.Point(442, 409);
+            this.groupBox1.Location = new System.Drawing.Point(393, 515);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(155, 120);
+            this.groupBox1.Size = new System.Drawing.Size(155, 108);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Параметры для ряда";
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.Gray;
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.Accuracy);
             this.groupBox2.Controls.Add(this.label8);
@@ -176,9 +179,9 @@
             this.groupBox2.Controls.Add(this.Ndot2);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.MaxR);
-            this.groupBox2.Location = new System.Drawing.Point(250, 409);
+            this.groupBox2.Location = new System.Drawing.Point(12, 515);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(186, 220);
+            this.groupBox2.Size = new System.Drawing.Size(361, 108);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Параметры для бифуркационной диаграммы";
@@ -187,7 +190,7 @@
             // 
             this.label9.AutoEllipsis = true;
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(9, 178);
+            this.label9.Location = new System.Drawing.Point(176, 75);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(95, 13);
             this.label9.TabIndex = 14;
@@ -195,7 +198,7 @@
             // 
             // Accuracy
             // 
-            this.Accuracy.Location = new System.Drawing.Point(120, 178);
+            this.Accuracy.Location = new System.Drawing.Point(290, 75);
             this.Accuracy.Name = "Accuracy";
             this.Accuracy.Size = new System.Drawing.Size(54, 20);
             this.Accuracy.TabIndex = 13;
@@ -204,7 +207,7 @@
             // 
             this.label8.AutoEllipsis = true;
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 155);
+            this.label8.Location = new System.Drawing.Point(176, 49);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(101, 13);
             this.label8.TabIndex = 13;
@@ -212,7 +215,7 @@
             // 
             // K
             // 
-            this.K.Location = new System.Drawing.Point(120, 152);
+            this.K.Location = new System.Drawing.Point(290, 49);
             this.K.Name = "K";
             this.K.Size = new System.Drawing.Size(54, 20);
             this.K.TabIndex = 12;
@@ -220,7 +223,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 100);
+            this.label7.Location = new System.Drawing.Point(10, 77);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(91, 13);
             this.label7.TabIndex = 11;
@@ -228,7 +231,7 @@
             // 
             // minR
             // 
-            this.minR.Location = new System.Drawing.Point(120, 100);
+            this.minR.Location = new System.Drawing.Point(107, 75);
             this.minR.Name = "minR";
             this.minR.Size = new System.Drawing.Size(54, 20);
             this.minR.TabIndex = 10;
@@ -236,7 +239,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 126);
+            this.label4.Location = new System.Drawing.Point(176, 23);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(108, 13);
             this.label4.TabIndex = 9;
@@ -244,7 +247,7 @@
             // 
             // NumberX
             // 
-            this.NumberX.Location = new System.Drawing.Point(120, 126);
+            this.NumberX.Location = new System.Drawing.Point(290, 23);
             this.NumberX.Name = "NumberX";
             this.NumberX.Size = new System.Drawing.Size(54, 20);
             this.NumberX.TabIndex = 8;
@@ -252,7 +255,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 49);
+            this.label5.Location = new System.Drawing.Point(10, 23);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 13);
             this.label5.TabIndex = 7;
@@ -260,7 +263,7 @@
             // 
             // Ndot2
             // 
-            this.Ndot2.Location = new System.Drawing.Point(120, 46);
+            this.Ndot2.Location = new System.Drawing.Point(107, 23);
             this.Ndot2.Name = "Ndot2";
             this.Ndot2.Size = new System.Drawing.Size(54, 20);
             this.Ndot2.TabIndex = 5;
@@ -268,7 +271,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 75);
+            this.label6.Location = new System.Drawing.Point(10, 52);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(97, 13);
             this.label6.TabIndex = 3;
@@ -276,7 +279,7 @@
             // 
             // MaxR
             // 
-            this.MaxR.Location = new System.Drawing.Point(120, 72);
+            this.MaxR.Location = new System.Drawing.Point(107, 49);
             this.MaxR.Name = "MaxR";
             this.MaxR.Size = new System.Drawing.Size(54, 20);
             this.MaxR.TabIndex = 1;
@@ -284,7 +287,7 @@
             // SolidLine
             // 
             this.SolidLine.AutoSize = true;
-            this.SolidLine.Location = new System.Drawing.Point(12, 583);
+            this.SolidLine.Location = new System.Drawing.Point(568, 549);
             this.SolidLine.Name = "SolidLine";
             this.SolidLine.Size = new System.Drawing.Size(135, 17);
             this.SolidLine.TabIndex = 12;
@@ -292,11 +295,23 @@
             this.SolidLine.UseVisualStyleBackColor = true;
             this.SolidLine.CheckedChanged += new System.EventHandler(this.SolidLine_CheckedChanged);
             // 
+            // CloseForm
+            // 
+            this.CloseForm.Location = new System.Drawing.Point(899, 593);
+            this.CloseForm.Name = "CloseForm";
+            this.CloseForm.Size = new System.Drawing.Size(113, 32);
+            this.CloseForm.TabIndex = 13;
+            this.CloseForm.Text = "Закрыть";
+            this.CloseForm.UseVisualStyleBackColor = true;
+            this.CloseForm.Click += new System.EventHandler(this.CloseForm_Click);
+            // 
             // LogGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1019, 628);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.ClientSize = new System.Drawing.Size(1026, 635);
+            this.Controls.Add(this.CloseForm);
             this.Controls.Add(this.SolidLine);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -344,6 +359,7 @@
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.TextBox Accuracy;
         private System.Windows.Forms.CheckBox SolidLine;
+        private System.Windows.Forms.Button CloseForm;
     }
 }
 

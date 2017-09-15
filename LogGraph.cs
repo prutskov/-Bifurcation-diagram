@@ -39,14 +39,14 @@ namespace Logistic
             NumberX.Text = Convert.ToString(1000);
             K.Text = Convert.ToString(100);
             Accuracy.Text = Convert.ToString(2);
-           bmp = new Bitmap(Graph.Width, Graph.Height);
-           painting();
+            bmp = new Bitmap(Graph.Width, Graph.Height);
+            painting();
         }
 
         Parametrs param = new Parametrs();
-        List <List<Dots>> dots_bifur = new List <List<Dots>>();
+        List<List<Dots>> dots_bifur = new List<List<Dots>>();
         Bitmap bmp;
-        
+
         bool bifurcation;
         double[] dots;
 
@@ -56,7 +56,9 @@ namespace Logistic
             bmp = new Bitmap(Graph.Width, Graph.Height);
             Graphics g = Graphics.FromImage(bmp); ;
 
-            Graph.BackColor = param.backgroundcolor;
+            SolidBrush brush_back = new SolidBrush(param.backgroundcolor);
+
+            g.FillRectangle(brush_back, 0, 0, Graph.Width, Graph.Height);
             //ручка для осей
             Pen osi = new Pen(param.osicolor, 3);
             osi.DashStyle = DashStyle.Solid;
@@ -77,14 +79,14 @@ namespace Logistic
             Pen solid_pen = new Pen(Color.Red, 1);
             solid_pen.DashStyle = DashStyle.Solid;
 
-          g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.TextRenderingHint = TextRenderingHint.AntiAlias;
 
             double width = Graph.Width, height = Graph.Height;
 
             //рисую оси
             g.DrawLine(osi, (float)param.X(width, param.xmin), (float)param.Y(height, 0), (float)param.X(width, param.xmax), (float)param.Y(height, 0));
-          //  g.DrawLine(osi, (float)param.X(width, 0), (float)param.Y(height, param.ymin), (float)param.X(width, 0), (float)param.Y(height, param.ymax));
+            //  g.DrawLine(osi, (float)param.X(width, 0), (float)param.Y(height, param.ymin), (float)param.X(width, 0), (float)param.Y(height, param.ymax));
 
             //рисую сетку
 
@@ -114,7 +116,7 @@ namespace Logistic
             //подписываю оси
             String str;
             Font font = new Font("Arial", 8);
-            
+
             SolidBrush brush = new SolidBrush(Color.White);
             //вправо
             for (double i = 0; i <= param.xmax; i += param.stepx)
@@ -154,13 +156,15 @@ namespace Logistic
             }
             else
             {
-                
-                for (int i = 0; i < dots_bifur.Count; i++)
+                if (!SolidLine.Checked)
                 {
-                    for (int j = 0; j < dots_bifur[i].Count; j++)
+                    for (int i = 0; i < dots_bifur.Count; i++)
                     {
-                        //g.DrawRectangle(bifur_pen, (float)param.X(Graph, dots_bifur[i].x), (float)param.Y(Graph, dots_bifur[i].y), 1, 1);
-                        bmp.SetPixel((int)param.X(width, dots_bifur[i][j].x), (int)param.Y(height, dots_bifur[i][j].y), bifur_pen.Color);
+                        for (int j = 0; j < dots_bifur[i].Count; j++)
+                        {
+                            //g.DrawRectangle(bifur_pen, (float)param.X(Graph, dots_bifur[i].x), (float)param.Y(Graph, dots_bifur[i].y), 1, 1);
+                            bmp.SetPixel((int)param.X(width, dots_bifur[i][j].x), (int)param.Y(height, dots_bifur[i][j].y), bifur_pen.Color);
+                        }
                     }
                 }
 
@@ -182,9 +186,11 @@ namespace Logistic
             }
 
             Graph.Image = bmp;
+
+            bmp.Save(@"pict.png", System.Drawing.Imaging.ImageFormat.Png);
         }
         private void Graph_Paint(object sender, PaintEventArgs e)
-        {           
+        {
 
         }
 
@@ -203,7 +209,7 @@ namespace Logistic
             dots[0] = x0;
             for (int i = 1; i < param.N; i++)
             {
-                dots[i] = R *dots[i-1]* (1 - dots[i - 1]);
+                dots[i] = R * dots[i - 1] * (1 - dots[i - 1]);
             }
         }
 
@@ -211,26 +217,26 @@ namespace Logistic
         {
             dots_bifur.Clear();
             Dots dot;
-            double stepR = (double.Parse(MaxR.Text)-double.Parse(minR.Text)) / double.Parse(Ndot2.Text);
+            double stepR = (double.Parse(MaxR.Text) - double.Parse(minR.Text)) / double.Parse(Ndot2.Text);
             double min = double.Parse(minR.Text);
             double max = double.Parse(MaxR.Text);
             int n = int.Parse(NumberX.Text);
             int kk = int.Parse(K.Text);
             double acc = double.Parse(Accuracy.Text);
-            Random rnd=new Random();
+            Random rnd = new Random();
             List<Dots> dot_buffer;
 
-           
+
             for (double i = min; i <= max; i += stepR)
             {
-                dot_buffer= new List<Dots>();
-                
-               
+                dot_buffer = new List<Dots>();
+
+
                 for (int k = 0; k < kk; k++)
                 {
                     dot = new Dots();
                     bool sovpadenie = false;
-                    double y = rnd.NextDouble(); 
+                    double y = rnd.NextDouble();
                     for (int j = 1; j < n; j++)
                     {
                         y = y * i * (1 - y);
@@ -238,7 +244,7 @@ namespace Logistic
 
                     for (int m = 0; m < dot_buffer.Count(); m++)
                     {
-                        if (Math.Abs(dot_buffer[m].y - y) < acc) sovpadenie=true;                       
+                        if (Math.Abs(dot_buffer[m].y - y) < acc) sovpadenie = true;
                     }
                     if (!sovpadenie)
                     {
@@ -248,7 +254,7 @@ namespace Logistic
                     }
                 }
                 dots_bifur.Add(dot_buffer);
-                
+
             }
 
 
@@ -279,7 +285,7 @@ namespace Logistic
                 for (int j = 0; j < dot[i].Count; j++)
                 {
                     if (dot[i][j].y > param.ymax) param.ymax = dot[i][j].y;
-                    if (dot[i][j].y< param.ymin) param.ymin = dot[i][j].y;
+                    if (dot[i][j].y < param.ymin) param.ymin = dot[i][j].y;
                 }
             }
             if (param.ymin > -param.ymax / 14) param.ymin = -param.ymax / 14;
@@ -314,11 +320,11 @@ namespace Logistic
 
         private void deep_search()
         {
-            for (int i = 0; i < dots_bifur.Count()-1; i++)
+            for (int i = 0; i < dots_bifur.Count() - 1; i++)
             {
                 double dif = 0, dif_min;
-                int number_min=0;
-                for (int k = 0; k < dots_bifur[i+1].Count(); k++)
+                int number_min = 0;
+                for (int k = 0; k < dots_bifur[i + 1].Count(); k++)
                 {
                     dif_min = Math.Abs(dots_bifur[i + 1][k].y - dots_bifur[i][0].y);
                     number_min = 0;
@@ -327,7 +333,7 @@ namespace Logistic
                         dif = Math.Abs(dots_bifur[i + 1][k].y - dots_bifur[i][j].y);
                         if (dif < dif_min) { number_min = j; dif_min = dif; }
                     }
-                    dots_bifur[i][number_min].Next.Add(dots_bifur[i+1][k]);
+                    dots_bifur[i][number_min].Next.Add(dots_bifur[i + 1][k]);
 
                 }
             }
@@ -336,6 +342,11 @@ namespace Logistic
         private void SolidLine_CheckedChanged(object sender, EventArgs e)
         {
             painting();
+        }
+
+        private void CloseForm_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
