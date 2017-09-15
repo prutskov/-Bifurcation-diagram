@@ -26,10 +26,10 @@ namespace Logistic
             param.N = 50;
             param.stepx = (double)param.xmax / 5;
             param.stepy = (double)param.ymax / 5;
-            param.osicolor = Color.White;
-            param.setkacolor = Color.White;
-            param.backgroundcolor = Color.Black;
-            param.graphcolor = Color.White;
+            param.osicolor = Color.Black;
+            param.setkacolor = Color.Black;
+            param.backgroundcolor = Color.White;
+            param.graphcolor = Color.Red;
             Ndot.Text = Convert.ToString(50);
             firstx.Text = Convert.ToString(0.5);
             R.Text = Convert.ToString(1.2);
@@ -38,7 +38,7 @@ namespace Logistic
             Ndot2.Text = Convert.ToString(500);
             NumberX.Text = Convert.ToString(1000);
             K.Text = Convert.ToString(100);
-            Accuracy.Text = Convert.ToString(2);
+            Accuracy.Text = Convert.ToString(1e-4);
             bmp = new Bitmap(Graph.Width, Graph.Height);
             painting();
         }
@@ -47,7 +47,8 @@ namespace Logistic
         List<List<Dots>> dots_bifur = new List<List<Dots>>();
         Bitmap bmp;
 
-        bool bifurcation;
+        int num_1, num_2;
+        
         double[] dots;
 
 
@@ -86,7 +87,7 @@ namespace Logistic
 
             //рисую оси
             g.DrawLine(osi, (float)param.X(width, param.xmin), (float)param.Y(height, 0), (float)param.X(width, param.xmax), (float)param.Y(height, 0));
-            //  g.DrawLine(osi, (float)param.X(width, 0), (float)param.Y(height, param.ymin), (float)param.X(width, 0), (float)param.Y(height, param.ymax));
+           
 
             //рисую сетку
 
@@ -117,7 +118,7 @@ namespace Logistic
             String str;
             Font font = new Font("Arial", 8);
 
-            SolidBrush brush = new SolidBrush(Color.White);
+            SolidBrush brush = new SolidBrush(param.osicolor);
             //вправо
             for (double i = 0; i <= param.xmax; i += param.stepx)
             {
@@ -143,7 +144,7 @@ namespace Logistic
                 g.DrawString(str, font, brush, (float)param.X(width, param.xmin), (float)param.Y(height, i) + 2);
             }
 
-            if (!bifurcation)
+            if (radioRyad.Checked)
             {
                 if (dots != null)
                 {
@@ -154,15 +155,14 @@ namespace Logistic
                     }
                 }
             }
-            else
+            if(radioDiagram.Checked)
             {
                 if (!SolidLine.Checked)
                 {
                     for (int i = 0; i < dots_bifur.Count; i++)
                     {
                         for (int j = 0; j < dots_bifur[i].Count; j++)
-                        {
-                            //g.DrawRectangle(bifur_pen, (float)param.X(Graph, dots_bifur[i].x), (float)param.Y(Graph, dots_bifur[i].y), 1, 1);
+                        {                            
                             bmp.SetPixel((int)param.X(width, dots_bifur[i][j].x), (int)param.Y(height, dots_bifur[i][j].y), bifur_pen.Color);
                         }
                     }
@@ -183,10 +183,15 @@ namespace Logistic
                         }
                     }
                 }
+                if (checkPoint.Checked)
+                {
+                    g.DrawEllipse(solid_pen, (float)param.X(width, dots_bifur[num_1][0].x) - 4, (float)param.Y(height, dots_bifur[num_1][0].y) - 4, 8, 8);
+                    g.DrawEllipse(solid_pen, (float)param.X(width, dots_bifur[num_2][0].x) - 4, (float)param.Y(height, dots_bifur[num_2][0].y) - 4, 8, 8);
+                    g.DrawEllipse(solid_pen, (float)param.X(width, dots_bifur[num_2][1].x) - 4, (float)param.Y(height, dots_bifur[num_2][1].y) - 4, 8, 8);
+                }
             }
 
             Graph.Image = bmp;
-
             bmp.Save(@"pict.png", System.Drawing.Imaging.ImageFormat.Png);
         }
         private void Graph_Paint(object sender, PaintEventArgs e)
@@ -297,26 +302,28 @@ namespace Logistic
 
         private void createdotsBtn_Click(object sender, EventArgs e)
         {
-            if (!bifurcation)
+            if (radioRyad.Checked)
             {
+                first_point.Text = "Постройте диаграмму...";
                 param.N = int.Parse(Ndot.Text);
+                param.setkacolor = param.osicolor;
                 dots = new double[param.N];
                 create_dots(double.Parse(firstx.Text), double.Parse(R.Text));
                 scale(dots);
             }
-            else
-            {
+            if(radioDiagram.Checked)
+            {               
+                param.setkacolor = param.backgroundcolor;                
                 create_dots_bifur();
                 scale(dots_bifur);
                 deep_search();
+                search_dot_bifur();
             }
             painting();
+            
         }
-
-        private void bifurcat_CheckedChanged(object sender, EventArgs e)
-        {
-            bifurcation = bifurcat.Checked;
-        }
+        
+       
 
         private void deep_search()
         {
@@ -341,12 +348,46 @@ namespace Logistic
 
         private void SolidLine_CheckedChanged(object sender, EventArgs e)
         {
-            painting();
+            painting();            
         }
 
         private void CloseForm_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        private void search_dot_bifur()
+        {
+            int number1st=0, number2st=0;
+            for (int i=0; i<dots_bifur.Count-1; i++)
+            {
+                if ((dots_bifur[i + 1].Count > 1)&&(number1st==0)) number1st = i;
+                if ((dots_bifur[i + 1].Count > 2) && (dots_bifur[i].Count == 2)&&(dots_bifur[i][0].x>3.2)) {number2st = i; break;}
+            }
+            first_point.Text = "R: " + dots_bifur[number1st][0].x.ToString("F3") + "; " + "X: "
+                + dots_bifur[number1st][0].y.ToString("F3") + "." +"\n"+ "R: " + dots_bifur[number2st][0].x.ToString("F3") + "; " + "X: "
+                + dots_bifur[number2st][0].y.ToString("F3") + "." + "\n" + "R: " + dots_bifur[number2st][1].x.ToString("F3") + "; " + "X: "
+                + dots_bifur[number2st][1].y.ToString("F3") + ".";
+            num_1 = number1st;
+            num_2 = number2st;
+            
+        }
+
+        private void checkPoint_CheckedChanged(object sender, EventArgs e)
+        {
+            painting();            
+        }
+
+        private void radioRyad_Click(object sender, EventArgs e)
+        {
+            this.createdotsBtn_Click(sender, e);
+        }
+
+        private void radioDiagram_Click(object sender, EventArgs e)
+        {
+            this.createdotsBtn_Click(sender, e);
+        }
+
+      
     }
 }
