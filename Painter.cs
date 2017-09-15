@@ -11,7 +11,7 @@ namespace Painter
     {
         public double xmin, xmax, ymin, ymax, stepx, stepy;
         public int N;
-        public Color backgroundcolor, graphcolor, osicolor, setkacolor;
+        public Color backgroundcolor, graphcolor, osicolor, setkacolor, pointcolor;
 
         public double X(double width, double x)
         {

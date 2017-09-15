@@ -33,6 +33,7 @@ namespace Logistic
             param.setkacolor = parametrs.setkacolor;
             param.osicolor = parametrs.osicolor;
             param.graphcolor = parametrs.graphcolor;
+            param.pointcolor = parametrs.pointcolor;
         }
 
         private Parametrs param = new Parametrs();
@@ -85,6 +86,13 @@ namespace Logistic
         private void Apply_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void colorPoint_Click(object sender, EventArgs e)
+        {
+            colorDialog.Color = param.pointcolor;
+            colorDialog.ShowDialog();
+            param.pointcolor = colorDialog.Color;
         }
 
        

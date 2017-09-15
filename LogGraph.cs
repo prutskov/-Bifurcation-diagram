@@ -30,6 +30,7 @@ namespace Logistic
             param.setkacolor = Color.Black;
             param.backgroundcolor = Color.White;
             param.graphcolor = Color.Red;
+            param.pointcolor = Color.Brown;
             Ndot.Text = Convert.ToString(50);
             firstx.Text = Convert.ToString(0.5);
             R.Text = Convert.ToString(1.2);
@@ -77,8 +78,7 @@ namespace Logistic
             setka.DashStyle = DashStyle.Solid;
 
             //ручка для сетки
-            Pen solid_pen = new Pen(Color.Red, 1);
-            solid_pen.DashStyle = DashStyle.Solid;
+            SolidBrush solidline = new SolidBrush(param.pointcolor);
 
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.TextRenderingHint = TextRenderingHint.AntiAlias;
@@ -177,7 +177,7 @@ namespace Logistic
                         {
                             for (int k = 0; k < dots_bifur[i][j].Next.Count(); k++)
                             {
-                                g.DrawLine(solid_pen, (float)param.X(width, dots_bifur[i][j].x), (float)param.Y(height, dots_bifur[i][j].y),
+                                g.DrawLine(bifur_pen, (float)param.X(width, dots_bifur[i][j].x), (float)param.Y(height, dots_bifur[i][j].y),
                                     (float)param.X(width, dots_bifur[i][j].Next[k].x), (float)param.Y(height, dots_bifur[i][j].Next[k].y));
                             }
                         }
@@ -185,14 +185,14 @@ namespace Logistic
                 }
                 if (checkPoint.Checked)
                 {
-                    g.DrawEllipse(solid_pen, (float)param.X(width, dots_bifur[num_1][0].x) - 4, (float)param.Y(height, dots_bifur[num_1][0].y) - 4, 8, 8);
-                    g.DrawEllipse(solid_pen, (float)param.X(width, dots_bifur[num_2][0].x) - 4, (float)param.Y(height, dots_bifur[num_2][0].y) - 4, 8, 8);
-                    g.DrawEllipse(solid_pen, (float)param.X(width, dots_bifur[num_2][1].x) - 4, (float)param.Y(height, dots_bifur[num_2][1].y) - 4, 8, 8);
+                    g.FillEllipse(solidline, (float)param.X(width, dots_bifur[num_1][0].x) - 4, (float)param.Y(height, dots_bifur[num_1][0].y) - 4, 8, 8);
+                    g.FillEllipse(solidline, (float)param.X(width, dots_bifur[num_2][0].x) - 4, (float)param.Y(height, dots_bifur[num_2][0].y) - 4, 8, 8);
+                    g.FillEllipse(solidline, (float)param.X(width, dots_bifur[num_2][1].x) - 4, (float)param.Y(height, dots_bifur[num_2][1].y) - 4, 8, 8);
                 }
             }
 
             Graph.Image = bmp;
-            bmp.Save(@"pict.png", System.Drawing.Imaging.ImageFormat.Png);
+            bmp.Save(@"picture.png", System.Drawing.Imaging.ImageFormat.Png);
         }
         private void Graph_Paint(object sender, PaintEventArgs e)
         {

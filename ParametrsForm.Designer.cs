@@ -48,28 +48,30 @@
             this.Xmax = new System.Windows.Forms.TextBox();
             this.Xmin = new System.Windows.Forms.TextBox();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.colorPoint = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.colorPoint);
             this.groupBox2.Controls.Add(this.colorGraph);
             this.groupBox2.Controls.Add(this.colorSetka);
             this.groupBox2.Controls.Add(this.colorOsi);
             this.groupBox2.Controls.Add(this.colorBackground);
-            this.groupBox2.Location = new System.Drawing.Point(237, 16);
+            this.groupBox2.Location = new System.Drawing.Point(212, 16);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(124, 158);
+            this.groupBox2.Size = new System.Drawing.Size(124, 205);
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Цвета";
             // 
             // colorGraph
             // 
-            this.colorGraph.Location = new System.Drawing.Point(6, 120);
+            this.colorGraph.Location = new System.Drawing.Point(6, 130);
             this.colorGraph.Name = "colorGraph";
-            this.colorGraph.Size = new System.Drawing.Size(113, 28);
+            this.colorGraph.Size = new System.Drawing.Size(113, 26);
             this.colorGraph.TabIndex = 19;
             this.colorGraph.Text = "Цвет графика...";
             this.colorGraph.UseVisualStyleBackColor = true;
@@ -77,7 +79,7 @@
             // 
             // colorSetka
             // 
-            this.colorSetka.Location = new System.Drawing.Point(5, 86);
+            this.colorSetka.Location = new System.Drawing.Point(5, 97);
             this.colorSetka.Name = "colorSetka";
             this.colorSetka.Size = new System.Drawing.Size(113, 28);
             this.colorSetka.TabIndex = 18;
@@ -89,9 +91,9 @@
             // 
             this.colorOsi.Location = new System.Drawing.Point(6, 52);
             this.colorOsi.Name = "colorOsi";
-            this.colorOsi.Size = new System.Drawing.Size(113, 28);
+            this.colorOsi.Size = new System.Drawing.Size(113, 39);
             this.colorOsi.TabIndex = 17;
-            this.colorOsi.Text = "Цвет осей...";
+            this.colorOsi.Text = "Цвет осей и подписей...";
             this.colorOsi.UseVisualStyleBackColor = true;
             this.colorOsi.Click += new System.EventHandler(this.colorOsi_Click);
             // 
@@ -108,7 +110,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(32, 252);
+            this.label7.Location = new System.Drawing.Point(23, 199);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(130, 13);
             this.label7.TabIndex = 24;
@@ -116,15 +118,15 @@
             // 
             // stepy
             // 
-            this.stepy.Location = new System.Drawing.Point(35, 268);
+            this.stepy.Location = new System.Drawing.Point(26, 215);
             this.stepy.Name = "stepy";
-            this.stepy.Size = new System.Drawing.Size(101, 20);
+            this.stepy.Size = new System.Drawing.Size(136, 20);
             this.stepy.TabIndex = 23;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(32, 213);
+            this.label6.Location = new System.Drawing.Point(23, 159);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(141, 13);
             this.label6.TabIndex = 22;
@@ -132,14 +134,14 @@
             // 
             // stepx
             // 
-            this.stepx.Location = new System.Drawing.Point(35, 229);
+            this.stepx.Location = new System.Drawing.Point(26, 176);
             this.stepx.Name = "stepx";
-            this.stepx.Size = new System.Drawing.Size(101, 20);
+            this.stepx.Size = new System.Drawing.Size(136, 20);
             this.stepx.TabIndex = 21;
             // 
             // Apply
             // 
-            this.Apply.Location = new System.Drawing.Point(225, 252);
+            this.Apply.Location = new System.Drawing.Point(218, 232);
             this.Apply.Name = "Apply";
             this.Apply.Size = new System.Drawing.Size(113, 28);
             this.Apply.TabIndex = 20;
@@ -228,11 +230,22 @@
             this.Xmin.Size = new System.Drawing.Size(113, 20);
             this.Xmin.TabIndex = 0;
             // 
+            // colorPoint
+            // 
+            this.colorPoint.Location = new System.Drawing.Point(5, 160);
+            this.colorPoint.Name = "colorPoint";
+            this.colorPoint.Size = new System.Drawing.Size(113, 36);
+            this.colorPoint.TabIndex = 20;
+            this.colorPoint.Text = "Цвет точек бифуркации...";
+            this.colorPoint.UseVisualStyleBackColor = true;
+            this.colorPoint.Click += new System.EventHandler(this.colorPoint_Click);
+            // 
             // ParametrsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 328);
+            this.BackColor = System.Drawing.Color.Gray;
+            this.ClientSize = new System.Drawing.Size(342, 272);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.stepy);
@@ -240,8 +253,9 @@
             this.Controls.Add(this.stepx);
             this.Controls.Add(this.Apply);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ParametrsForm";
-            this.Text = "ParametrsForm";
+            this.Text = "Параметры графика";
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -272,5 +286,6 @@
         private System.Windows.Forms.TextBox Xmax;
         private System.Windows.Forms.TextBox Xmin;
         private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.Button colorPoint;
     }
 }
