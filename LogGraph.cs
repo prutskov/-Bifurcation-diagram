@@ -164,15 +164,18 @@ namespace Logistic
                     }
                 }
 
-
-                for (int i=0; i<dots_bifur.Count(); i++)
+                if (SolidLine.Checked)
                 {
-                    for (int j=0; j<dots_bifur[i].Count(); j++)
+
+                    for (int i = 0; i < dots_bifur.Count(); i++)
                     {
-                        for (int k=0; k< dots_bifur[i][j].Next.Count(); k++)
+                        for (int j = 0; j < dots_bifur[i].Count(); j++)
                         {
-                            g.DrawLine(solid_pen, (float)param.X(width, dots_bifur[i][j].x), (float)param.Y(height, dots_bifur[i][j].y),
-                                (float)param.X(width, dots_bifur[i][j].Next[k].x), (float)param.Y(height, dots_bifur[i][j].Next[k].y));
+                            for (int k = 0; k < dots_bifur[i][j].Next.Count(); k++)
+                            {
+                                g.DrawLine(solid_pen, (float)param.X(width, dots_bifur[i][j].x), (float)param.Y(height, dots_bifur[i][j].y),
+                                    (float)param.X(width, dots_bifur[i][j].Next[k].x), (float)param.Y(height, dots_bifur[i][j].Next[k].y));
+                            }
                         }
                     }
                 }
@@ -318,6 +321,11 @@ namespace Logistic
 
                 }
             }
+        }
+
+        private void SolidLine_CheckedChanged(object sender, EventArgs e)
+        {
+            painting();
         }
     }
 }
