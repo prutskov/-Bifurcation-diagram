@@ -229,14 +229,23 @@ namespace Logistic
                 for (int k = 0; k < kk; k++)
                 {
                     dot = new Dots();
+                    bool sovpadenie = false;
                     double y = rnd.NextDouble(); 
                     for (int j = 1; j < n; j++)
                     {
                         y = y * i * (1 - y);
                     }
-                    dot.x = i;
-                    dot.y = y;
-                    dot_buffer.Add(dot);
+
+                    for (int m = 0; m < dot_buffer.Count(); m++)
+                    {
+                        if (Math.Abs(dot_buffer[m].y - y) < acc) sovpadenie=true;                       
+                    }
+                    if (!sovpadenie)
+                    {
+                        dot.x = i;
+                        dot.y = y;
+                        dot_buffer.Add(dot);
+                    }
                 }
                 dots_bifur.Add(dot_buffer);
                 
@@ -305,19 +314,20 @@ namespace Logistic
 
         private void deep_search()
         {
-            for (int i = 0; i < dots_bifur.Count-1; i++)
+            for (int i = 0; i < dots_bifur.Count()-1; i++)
             {
-                double dif = 0, dif_min = double.Parse(Accuracy.Text);
+                double dif = 0, dif_min;
                 int number_min=0;
-                for (int k = 0; k < dots_bifur[i].Count(); k++)
+                for (int k = 0; k < dots_bifur[i+1].Count(); k++)
                 {
-                    for (int j = 0; j < dots_bifur[i + 1].Count(); j++)
+                    dif_min = Math.Abs(dots_bifur[i + 1][k].y - dots_bifur[i][0].y);
+                    number_min = 0;
+                    for (int j = 1; j < dots_bifur[i].Count(); j++)
                     {
-
-                        dif = Math.Abs(dots_bifur[i + 1][j].y - dots_bifur[i][k].y);
+                        dif = Math.Abs(dots_bifur[i + 1][k].y - dots_bifur[i][j].y);
                         if (dif < dif_min) { number_min = j; dif_min = dif; }
                     }
-                    dots_bifur[i][k].Next.Add(dots_bifur[i+1][number_min]);
+                    dots_bifur[i][number_min].Next.Add(dots_bifur[i+1][k]);
 
                 }
             }

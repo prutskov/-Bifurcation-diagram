@@ -17,3 +17,13 @@ E:\Учеба\4 курс\Моделирование систем\Logistic\obj\De
 E:\Учеба\4 курс\Моделирование систем\Logistic\obj\Debug\Logistic.Properties.Resources.resources
 E:\Учеба\4 курс\Моделирование систем\Logistic\obj\Debug\Logistic.csproj.GenerateResource.Cache
 E:\Учеба\4 курс\Моделирование систем\Logistic\obj\Debug\Logistic.ParametrsForm.resources
+C:\Users\14PAN\Desktop\Logistic\bin\Debug\Logistic.exe.config
+C:\Users\14PAN\Desktop\Logistic\bin\Debug\Logistic.exe
+C:\Users\14PAN\Desktop\Logistic\bin\Debug\Logistic.pdb
+C:\Users\14PAN\Desktop\Logistic\obj\Debug\Logistic.csprojResolveAssemblyReference.cache
+C:\Users\14PAN\Desktop\Logistic\obj\Debug\Logistic.LogGraph.resources
+C:\Users\14PAN\Desktop\Logistic\obj\Debug\Logistic.ParametrsForm.resources
+C:\Users\14PAN\Desktop\Logistic\obj\Debug\Logistic.Properties.Resources.resources
+C:\Users\14PAN\Desktop\Logistic\obj\Debug\Logistic.csproj.GenerateResource.Cache
+C:\Users\14PAN\Desktop\Logistic\obj\Debug\Logistic.exe
+C:\Users\14PAN\Desktop\Logistic\obj\Debug\Logistic.pdb
