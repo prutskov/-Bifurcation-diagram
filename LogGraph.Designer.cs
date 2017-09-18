@@ -154,7 +154,7 @@
             this.groupBox1.Controls.Add(this.firstx);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.Ndot);
-            this.groupBox1.Location = new System.Drawing.Point(393, 515);
+            this.groupBox1.Location = new System.Drawing.Point(382, 515);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(155, 108);
             this.groupBox1.TabIndex = 10;
@@ -325,9 +325,9 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.first_point);
-            this.groupBox3.Location = new System.Drawing.Point(562, 515);
+            this.groupBox3.Location = new System.Drawing.Point(547, 515);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(138, 107);
+            this.groupBox3.Size = new System.Drawing.Size(158, 107);
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Точки бифуркации";
@@ -386,7 +386,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "LogGraph";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Графики";
+            this.Text = "Логистическая модель";
             ((System.ComponentModel.ISupportInitialize)(this.Graph)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

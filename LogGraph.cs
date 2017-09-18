@@ -122,13 +122,13 @@ namespace Logistic
             //вправо
             for (double i = 0; i <= param.xmax; i += param.stepx)
             {
-                str = i.ToString("F1");
+                str = i.ToString("F2");
                 g.DrawString(str, font, brush, (float)param.X(width, i), (float)param.Y(height, 0) + 2);
             }
             //влево
             for (double i = -param.stepx; i >= param.xmin; i -= param.stepx)
             {
-                str = i.ToString("F1");
+                str = i.ToString("F2");
                 g.DrawString(str, font, brush, (float)param.X(width, i), (float)param.Y(height, 0) + 2);
             }
             //вверх
@@ -183,7 +183,7 @@ namespace Logistic
                         }
                     }
                 }
-                if (checkPoint.Checked)
+                if ((checkPoint.Checked)&&(num_1!=num_2))
                 {
                     g.FillEllipse(solidline, (float)param.X(width, dots_bifur[num_1][0].x) - 4, (float)param.Y(height, dots_bifur[num_1][0].y) - 4, 8, 8);
                     g.FillEllipse(solidline, (float)param.X(width, dots_bifur[num_2][0].x) - 4, (float)param.Y(height, dots_bifur[num_2][0].y) - 4, 8, 8);
@@ -222,9 +222,16 @@ namespace Logistic
         {
             dots_bifur.Clear();
             Dots dot;
-            double stepR = (double.Parse(MaxR.Text) - double.Parse(minR.Text)) / double.Parse(Ndot2.Text);
-            double min = double.Parse(minR.Text);
-            double max = double.Parse(MaxR.Text);
+            double max, min;
+
+            
+            if (double.Parse(MaxR.Text) > 4) { max = 4; MaxR.Text = "4"; MessageBox.Show("Значения R лежат в промежутке [0,4].", "Выход за границы диапазона"); }
+            else max = double.Parse(MaxR.Text);
+            if (double.Parse(minR.Text) < 0) { min = 0; minR.Text = "0"; MessageBox.Show("Значения R лежат в промежутке [0,4].", "Выход за границы диапазона"); }
+            else min = double.Parse(minR.Text);
+            
+
+            double stepR = (max - min) / double.Parse(Ndot2.Text);
             int n = int.Parse(NumberX.Text);
             int kk = int.Parse(K.Text);
             double acc = double.Parse(Accuracy.Text);
@@ -296,7 +303,7 @@ namespace Logistic
             if (param.ymin > -param.ymax / 14) param.ymin = -param.ymax / 14;
             param.xmin = double.Parse(minR.Text);
             param.xmax = double.Parse(MaxR.Text);
-            param.stepx = (double)param.xmax / 5;
+            param.stepx = (double)param.xmax / 10;
             param.stepy = (double)param.ymax / 5;
         }
 
@@ -308,7 +315,22 @@ namespace Logistic
                 param.N = int.Parse(Ndot.Text);
                 param.setkacolor = param.osicolor;
                 dots = new double[param.N];
-                create_dots(double.Parse(firstx.Text), double.Parse(R.Text));
+                double Rr, x0;
+                if (double.Parse(R.Text) > 4) { Rr = 4; R.Text = "4"; MessageBox.Show("Значения R лежат в промежутке [0,4].", "Выход за границы диапазона"); }
+                else
+                {
+                    if (double.Parse(R.Text) < 0) { Rr = 0; R.Text = "0"; MessageBox.Show("Значения R лежат в промежутке [0,4].", "Выход за границы диапазона"); }
+                    else Rr = double.Parse(R.Text);
+                }
+
+                if (double.Parse(firstx.Text) > 1) { x0 = 1; firstx.Text = "1"; MessageBox.Show("Значения Х лежат в промежутке [0,1].", "Выход за границы диапазона"); }
+                else
+                {
+                    if (double.Parse(firstx.Text) < 0) { x0 = 0; firstx.Text = "0"; MessageBox.Show("Значения Х лежат в промежутке [0,1].", "Выход за границы диапазона"); }
+                    else x0 = double.Parse(firstx.Text);
+                }
+
+                create_dots(x0, Rr);
                 scale(dots);
             }
             if(radioDiagram.Checked)
@@ -359,22 +381,27 @@ namespace Logistic
         private void search_dot_bifur()
         {
             int number1st=0, number2st=0;
-            for (int i=0; i<dots_bifur.Count-1; i++)
+            if ((double.Parse(MaxR.Text) > 3.5)&&(double.Parse(minR.Text)<2.98))
             {
-                if ((dots_bifur[i + 1].Count > 1)&&(number1st==0)) number1st = i;
-                if ((dots_bifur[i + 1].Count > 2) && (dots_bifur[i].Count == 2)&&(dots_bifur[i][0].x>3.2)) {number2st = i; break;}
+                for (int i = 0; i < dots_bifur.Count - 1; i++)
+                {
+
+                    if ((dots_bifur[i + 1].Count > 1) && (number1st == 0)) number1st = i;
+                    if ((dots_bifur[i + 1].Count > 2) && (dots_bifur[i].Count == 2) && (dots_bifur[i][0].x > 3.2)) { number2st = i; break; }
+                }
+                first_point.Text = "R: " + dots_bifur[number1st][0].x.ToString("F3") + "; " + "X: "
+                    + dots_bifur[number1st][0].y.ToString("F3") + "." + "\n" + "R: " + dots_bifur[number2st][0].x.ToString("F3") + "; " + "X: "
+                    + dots_bifur[number2st][0].y.ToString("F3") + "." + "\n" + "R: " + dots_bifur[number2st][1].x.ToString("F3") + "; " + "X: "
+                    + dots_bifur[number2st][1].y.ToString("F3") + ".";
+                num_1 = number1st;
+                num_2 = number2st;
             }
-            first_point.Text = "R: " + dots_bifur[number1st][0].x.ToString("F3") + "; " + "X: "
-                + dots_bifur[number1st][0].y.ToString("F3") + "." +"\n"+ "R: " + dots_bifur[number2st][0].x.ToString("F3") + "; " + "X: "
-                + dots_bifur[number2st][0].y.ToString("F3") + "." + "\n" + "R: " + dots_bifur[number2st][1].x.ToString("F3") + "; " + "X: "
-                + dots_bifur[number2st][1].y.ToString("F3") + ".";
-            num_1 = number1st;
-            num_2 = number2st;
-            
+            else { num_1 = num_2; first_point.Text = "Выход за границы поиска!"; }
         }
 
         private void checkPoint_CheckedChanged(object sender, EventArgs e)
         {
+            search_dot_bifur();
             painting();            
         }
 
